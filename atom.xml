@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-10-29T02:57:25.393Z</updated>
+  <updated>2018-10-29T07:43:58.950Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="http://yoursite.com/2018/08/27/Mask_RCNN/"/>
-    <id>http://yoursite.com/2018/08/27/Mask_RCNN/</id>
-    <published>2018-08-27T08:11:10.899Z</published>
-    <updated>2018-10-29T02:57:25.393Z</updated>
+    <title>Mask_RCNN源码学习笔记</title>
+    <link href="http://yoursite.com/2018/10/29/Mask-RCNN%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>http://yoursite.com/2018/10/29/Mask-RCNN源码学习笔记/</id>
+    <published>2018-10-29T07:29:57.000Z</published>
+    <updated>2018-10-29T07:43:58.950Z</updated>
     
     <summary type="html">
     
@@ -29,38 +29,18 @@
       
         
         
-          &lt;h1 id=&quot;Mask-RCNN源码学习&quot;&gt;&lt;a href=&quot;#Mask-RCNN源码学习&quot; class=&quot;headerlink&quot; title=&quot;Mask_RCNN源码学习&quot;&gt;&lt;/a&gt;&lt;strong&gt;Mask_RCNN源码学习&lt;/strong&gt;&lt;/h1&gt;&lt;h3
+          &lt;h1 id=&quot;Mask-RCNN源码学习&quot;&gt;&lt;a href=&quot;#Mask-RCNN源码学习&quot; class=&quot;headerlink&quot; title=&quot;Mask_RCNN源码学习&quot;&gt;&lt;/a&gt;&lt;strong&gt;Mask_RCNN源码学习&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;&lt;a
         
       
     
     </summary>
     
-    
-  </entry>
-  
-  <entry>
-    <title>hexo 添加标签和分类</title>
-    <link href="http://yoursite.com/2018/04/27/hello-world/"/>
-    <id>http://yoursite.com/2018/04/27/hello-world/</id>
-    <published>2018-04-27T15:00:34.000Z</published>
-    <updated>2018-10-29T07:15:23.972Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a
-        
-      
-    
-    </summary>
-    
-      <category term="hexo" scheme="http://yoursite.com/categories/hexo/"/>
+      <category term="深度学习" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
+      <category term="Object Detection" scheme="http://yoursite.com/tags/Object-Detection/"/>
+    
+      <category term="Neural Network" scheme="http://yoursite.com/tags/Neural-Network/"/>
     
   </entry>
   
