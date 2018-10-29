@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.4.2" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.4.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.4.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.4.2" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.4.2',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Mask_RCNN源码学习安装和部署    详细步骤参考源码主页  Install dependencies 1pip3 install -r requirements.txt  Clone this repository  Run setup from the repository root directory 1python3 setup.py install  Download pre-tr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2018/08/27/Mask_RCNN/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Mask_RCNN源码学习安装和部署    详细步骤参考源码主页  Install dependencies 1pip3 install -r requirements.txt  Clone this repository  Run setup from the repository root directory 1python3 setup.py install  Download pre-tr">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/Users/moubinhao/Library/Application%20Support/typora-user-images/image-20181010111745240.png">
+<meta property="og:image" content="http://yoursite.com/var/folders/cy/fsw71sr97v11myb_y8h56bn00000gn/T/abnerworks.Typora/image-20180828144900773.png">
+<meta property="og:updated_time" content="2018-10-29T02:57:25.393Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="Mask_RCNN源码学习安装和部署    详细步骤参考源码主页  Install dependencies 1pip3 install -r requirements.txt  Clone this repository  Run setup from the repository root directory 1python3 setup.py install  Download pre-tr">
+<meta name="twitter:image" content="http://yoursite.com/Users/moubinhao/Library/Application%20Support/typora-user-images/image-20181010111745240.png">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/27/Mask_RCNN/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title> | Hexo</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband">
+      <a href="https://github.com/rangermbh">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+    </div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/27/Mask_RCNN/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/../images/image.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-08-27 16:11:10" itemprop="dateCreated datePublished" datetime="2018-08-27T16:11:10+08:00">2018-08-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-10-29 10:57:25" itemprop="dateModified" datetime="2018-10-29T10:57:25+08:00">2018-10-29</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Mask-RCNN源码学习"><a href="#Mask-RCNN源码学习" class="headerlink" title="Mask_RCNN源码学习"></a><strong>Mask_RCNN源码学习</strong></h1><h3 id="安装和部署"><a href="#安装和部署" class="headerlink" title="安装和部署"></a>安装和部署</h3><hr>
+<p>   详细步骤参考源码主页</p>
+<ol>
+<li><p>Install dependencies</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install -r requirements.txt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Clone this repository</p>
+</li>
+<li><p>Run setup from the repository root directory</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 setup.py install</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Download pre-trained COCO weights (mask_rcnn_coco.h5) from the <a href="https://github.com/matterport/Mask_RCNN/releases" target="_blank" rel="noopener">releases page</a>.</p>
+</li>
+<li><p>(Optional) To train or test on MS COCO install <code>pycocotools</code>  from one of these repos. They are forks of the original pycocotools  with fixes for Python3 and Windows (the official repo doesn’t seem to be  active anymore).</p>
+<ul>
+<li>Linux: <a href="https://github.com/waleedka/coco" target="_blank" rel="noopener">https://github.com/waleedka/coco</a></li>
+<li>Windows: <a href="https://github.com/philferriere/cocoapi" target="_blank" rel="noopener">https://github.com/philferriere/cocoapi</a>. You must have the Visual C++ 2015 build tools on your path (see the repo for additional details)</li>
+</ul>
+</li>
+</ol>
+<h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><hr>
+<pre><code>源码中用到了coco数据集和balloon数据集，以及一个随机随机生成的shape数据集。
+</code></pre><ul>
+<li><h4 id="coco数据集有自己的格式和API-pycocotools"><a href="#coco数据集有自己的格式和API-pycocotools" class="headerlink" title="coco数据集有自己的格式和API (pycocotools)"></a>coco数据集有自己的格式和API (pycocotools)</h4><pre><code>关于coco的数据格式可以参考博客：[MSCOCO数据标注详解](https://blog.csdn.net/wc781708249/article/details/79603522)
+</code></pre></li>
+<li><h4 id="balloon使用使用VGG-Image-Annotator-JSON格式如下"><a href="#balloon使用使用VGG-Image-Annotator-JSON格式如下" class="headerlink" title="balloon使用使用VGG_Image_Annotator, JSON格式如下:"></a>balloon使用使用<a href="http://www.robots.ox.ac.uk/~vgg/software/via/" target="_blank" rel="noopener">VGG_Image_Annotator</a>, JSON格式如下:</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123; 'filename': '28503151_5b5b7ec140_b.jpg',</span><br><span class="line">   'regions': &#123;</span><br><span class="line">       '0': &#123;</span><br><span class="line">           'region_attributes': &#123;&#125;,</span><br><span class="line">           'shape_attributes': &#123;</span><br><span class="line">               'all_points_x': [...],</span><br><span class="line">               'all_points_y': [...],</span><br><span class="line">               'name': 'polygon'&#125;&#125;,</span><br><span class="line">       ... more regions ...</span><br><span class="line">   &#125;,</span><br><span class="line">   'size': 100202</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"># huaxi annotations json </span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"4641434 0.jpg80274"</span>: &#123;</span><br><span class="line">        <span class="attr">"filename"</span>: <span class="string">"4641434 0.jpg"</span>, </span><br><span class="line">        <span class="attr">"size"</span>: <span class="number">80274</span>, </span><br><span class="line">        <span class="attr">"regions"</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"shape_attributes"</span>: &#123;</span><br><span class="line">                    <span class="attr">"name"</span>: <span class="string">"polyline"</span>, </span><br><span class="line">                    <span class="attr">"all_points_x"</span>: [...], </span><br><span class="line">                    <span class="attr">"all_points_y"</span>: [...]</span><br><span class="line">                &#125;, </span><br><span class="line">                <span class="attr">"region_attributes"</span>: &#123;</span><br><span class="line">                    <span class="attr">"type"</span>: <span class="string">"maglinant"</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ], </span><br><span class="line">        <span class="attr">"file_attributes"</span>: &#123; &#125;</span><br><span class="line">    &#125;, </span><br><span class="line">    <span class="attr">"1.jpg89163"</span>: &#123;</span><br><span class="line">        <span class="attr">"filename"</span>: <span class="string">"1.jpg"</span>, </span><br><span class="line">        <span class="attr">"size"</span>: <span class="number">89163</span>, </span><br><span class="line">        <span class="attr">"regions"</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="attr">"shape_attributes"</span>: &#123;</span><br><span class="line">                    <span class="attr">"name"</span>: <span class="string">"polyline"</span>, </span><br><span class="line">                    <span class="attr">"all_points_x"</span>: [...], </span><br><span class="line">                    <span class="attr">"all_points_y"</span>: [...]</span><br><span class="line">                &#125;, </span><br><span class="line">                <span class="attr">"region_attributes"</span>: &#123;</span><br><span class="line">                    <span class="attr">"type"</span>: <span class="string">"optimum"</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        ], </span><br><span class="line">        <span class="attr">"file_attributes"</span>: &#123; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>###数据组织方式</p>
+<p>源码对数据集进行了比较好的组织，形成了具有通用性的数据组织结构。其中，数据集的utils.Dataset类，其具体结构如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">__init__</span><span class="params">(self, class_map=None)</span>:</span></span><br><span class="line"><span class="function">    self._image_ids </span>= []</span><br><span class="line">    self.image_info = []</span><br><span class="line">    # Background is always the first class</span><br><span class="line">    self.class_info = [&#123;<span class="string">"source"</span>: <span class="string">""</span>, <span class="string">"id"</span>: <span class="number">0</span>, <span class="string">"name"</span>: <span class="string">"BG"</span>&#125;]</span><br><span class="line">    self.source_class_ids = &#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>从这个初始化函数可以看出，所有的数据都被组织成：图片索引的列表、有序图片的信息、所有的类等信息，</p>
+<p>具体来看各部分的内容（以华西数据集为例，这里只有两张图片）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">_image_ids</span><br><span class="line">[<span class="number">0</span> <span class="number">1</span>]</span><br><span class="line">class_from_source_map</span><br><span class="line">&#123;<span class="string">'.0'</span>: <span class="number">0</span>, <span class="string">'huaxi.1'</span>: <span class="number">1</span>, <span class="string">'huaxi.2'</span>: <span class="number">2</span>&#125;</span><br><span class="line">class_ids</span><br><span class="line">[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span>]</span><br><span class="line">class_info</span><br><span class="line">[&#123;<span class="string">'source'</span>: <span class="string">''</span>, <span class="string">'id'</span>: <span class="number">0</span>, <span class="string">'name'</span>: <span class="string">'BG'</span>&#125;, &#123;<span class="string">'source'</span>: <span class="string">'huaxi'</span>, <span class="string">'id'</span>: <span class="number">1</span>, <span class="string">'name'</span>: <span class="string">'malignant'</span>&#125;, &#123;<span class="string">'source'</span>: <span class="string">'huaxi'</span>, <span class="string">'id'</span>: <span class="number">2</span>, <span class="string">'name'</span>: <span class="string">'optimum'</span>&#125;]</span><br><span class="line">class_names</span><br><span class="line">[<span class="string">'BG'</span>, <span class="string">'malignant'</span>, <span class="string">'optimum'</span>]</span><br><span class="line">image_ids</span><br><span class="line">[<span class="number">0</span> <span class="number">1</span>]</span><br><span class="line">image_info</span><br><span class="line">[&#123;<span class="string">'id'</span>: <span class="string">'4641434 0.jpg'</span>, <span class="string">'source'</span>: <span class="string">'huaxi'</span>, <span class="string">'path'</span>: <span class="string">'/Users/moubinhao/githubDownload/Mask_RCNN-2.1/datasets/huaxi/train/4641434 0.jpg'</span>, <span class="string">'width'</span>: <span class="number">1080</span>, <span class="string">'height'</span>: <span class="number">810</span>, <span class="string">'class_id'</span>: [<span class="number">1</span>], <span class="string">'polygons'</span>: [&#123;<span class="string">'name'</span>: <span class="string">'polyline'</span>, <span class="string">'all_points_x'</span>: [<span class="number">502</span>, <span class="number">475</span>, <span class="number">412</span>, <span class="number">408</span>, <span class="number">441</span>, <span class="number">334</span>, <span class="number">351</span>, <span class="number">409</span>, <span class="number">491</span>, <span class="number">554</span>, <span class="number">576</span>, <span class="number">624</span>, <span class="number">686</span>, <span class="number">688</span>, <span class="number">729</span>, <span class="number">759</span>, <span class="number">741</span>, <span class="number">676</span>, <span class="number">610</span>, <span class="number">567</span>, <span class="number">550</span>, <span class="number">557</span>, <span class="number">578</span>, <span class="number">562</span>, <span class="number">525</span>, <span class="number">496</span>, <span class="number">502</span>], <span class="string">'all_points_y'</span>: [<span class="number">223</span>, <span class="number">250</span>, <span class="number">270</span>, <span class="number">294</span>, <span class="number">316</span>, <span class="number">407</span>, <span class="number">476</span>, <span class="number">502</span>, <span class="number">525</span>, <span class="number">485</span>, <span class="number">468</span>, <span class="number">480</span>, <span class="number">441</span>, <span class="number">413</span>, <span class="number">407</span>, <span class="number">394</span>, <span class="number">322</span>, <span class="number">302</span>, <span class="number">292</span>, <span class="number">289</span>, <span class="number">283</span>, <span class="number">258</span>, <span class="number">229</span>, <span class="number">211</span>, <span class="number">209</span>, <span class="number">223</span>, <span class="number">223</span>]&#125;]&#125;, &#123;<span class="string">'id'</span>: <span class="string">'1.jpg'</span>, <span class="string">'source'</span>: <span class="string">'huaxi'</span>, <span class="string">'path'</span>: <span class="string">'/Users/moubinhao/githubDownload/Mask_RCNN-2.1/datasets/huaxi/train/1.jpg'</span>, <span class="string">'width'</span>: <span class="number">960</span>, <span class="string">'height'</span>: <span class="number">720</span>, <span class="string">'class_id'</span>: [<span class="number">2</span>], <span class="string">'polygons'</span>: [&#123;<span class="string">'name'</span>: <span class="string">'polyline'</span>, <span class="string">'all_points_x'</span>: [<span class="number">404</span>, <span class="number">402</span>, <span class="number">415</span>, <span class="number">457</span>, <span class="number">477</span>, <span class="number">511</span>, <span class="number">537</span>, <span class="number">555</span>, <span class="number">552</span>, <span class="number">515</span>, <span class="number">474</span>, <span class="number">432</span>, <span class="number">411</span>, <span class="number">405</span>], <span class="string">'all_points_y'</span>: [<span class="number">315</span>, <span class="number">345</span>, <span class="number">363</span>, <span class="number">363</span>, <span class="number">371</span>, <span class="number">364</span>, <span class="number">353</span>, <span class="number">339</span>, <span class="number">326</span>, <span class="number">312</span>, <span class="number">314</span>, <span class="number">314</span>, <span class="number">314</span>, <span class="number">315</span>]&#125;]&#125;]</span><br><span class="line">num_classes</span><br><span class="line"><span class="number">3</span></span><br><span class="line">num_images</span><br><span class="line"><span class="number">2</span></span><br><span class="line">source_class_ids</span><br><span class="line">&#123;<span class="string">''</span>: [<span class="number">0</span>], <span class="string">'huaxi'</span>: [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]&#125;</span><br><span class="line">sources</span><br><span class="line">[<span class="string">''</span>, <span class="string">'huaxi'</span>]</span><br></pre></td></tr></table></figure>
+<p>其它数据集可以通过继承该类并重写方法实现，代码类似于这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">""</span><span class="string">"The base class for dataset classes.</span></span><br><span class="line"><span class="string">To use it, create a new class that adds functions specific to the dataset</span></span><br><span class="line"><span class="string">you want to use. For example:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">class CatsAndDogsDataset(Dataset):</span></span><br><span class="line"><span class="string">    def load_cats_and_dogs(self):</span></span><br><span class="line"><span class="string">        ...</span></span><br><span class="line"><span class="string">    def load_mask(self, image_id):</span></span><br><span class="line"><span class="string">        ...</span></span><br><span class="line"><span class="string">    def image_reference(self, image_id):</span></span><br><span class="line"><span class="string">        ...</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">See COCODataset and ShapesDataset as examples.</span></span><br></pre></td></tr></table></figure>
+<p>在使用数据集钱，必须调用prepare()函数, 该函数申明了一些成员变量（<strong>python可以随时添加成员变量</strong>），进一步描述数据集，方便后面使用，这些内容在前面的数据集具体展示中体现出来：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">def <span class="title">prepare</span><span class="params">(self, class_map=None)</span>:</span></span><br><span class="line"><span class="function">    """Prepares the Dataset class <span class="keyword">for</span> use.</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">    TODO: class map is not supported yet. When done, it should handle mapping</span></span><br><span class="line"><span class="function">          classes from different datasets to the same class ID.</span></span><br><span class="line"><span class="function">    """</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">    def <span class="title">clean_name</span><span class="params">(name)</span>:</span></span><br><span class="line"><span class="function">        """Returns a shorter version of object names <span class="keyword">for</span> cleaner display."""</span></span><br><span class="line"><span class="function">        return ",".<span class="title">join</span><span class="params">(name.split(<span class="string">","</span>)</span>[:1])</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">    # <span class="title">Build</span> <span class="params">(or rebuild)</span> everything <span class="keyword">else</span> from the info dicts.</span></span><br><span class="line"><span class="function">    self.num_classes </span>= len(self.class_info)</span><br><span class="line">    self.class_ids = np.arange(self.num_classes)</span><br><span class="line">    self.class_names = [clean_name(c[<span class="string">"name"</span>]) <span class="keyword">for</span> c in self.class_info]</span><br><span class="line">    self.num_images = len(self.image_info)</span><br><span class="line">    self._image_ids = np.arange(self.num_images)</span><br><span class="line"></span><br><span class="line">    self.class_from_source_map = &#123;<span class="string">"&#123;&#125;.&#123;&#125;"</span>.format(info[<span class="string">'source'</span>], info[<span class="string">'id'</span>]): id</span><br><span class="line">                                  <span class="keyword">for</span> info, <span class="function">id in <span class="title">zip</span><span class="params">(self.class_info, self.class_ids)</span>&#125;</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">    # Map sources to class_ids they support</span></span><br><span class="line"><span class="function">    self.sources </span>= list(set([i[<span class="string">'source'</span>] <span class="keyword">for</span> i in self.class_info]))</span><br><span class="line">    self.source_class_ids = &#123;&#125;</span><br><span class="line">    # Loop over datasets</span><br><span class="line">    <span class="keyword">for</span> source in self.sources:</span><br><span class="line">        self.source_class_ids[source] = []</span><br><span class="line">        # Find classes that belong to this dataset</span><br><span class="line">        <span class="keyword">for</span> i, <span class="function">info in <span class="title">enumerate</span><span class="params">(self.class_info)</span>:</span></span><br><span class="line"><span class="function">            # Include BG class in all datasets</span></span><br><span class="line"><span class="function">            <span class="keyword">if</span> i </span>== <span class="number">0</span> or source == info[<span class="string">'source'</span>]:</span><br><span class="line">                self.source_class_ids[source].append(i)</span><br></pre></td></tr></table></figure>
+<h3 id="模型参数配置"><a href="#模型参数配置" class="headerlink" title="模型参数配置"></a>模型参数配置</h3><p>参数配置的设置也采用继承的方式，基类为Config.class(config.py)，设置了一系列的配置参数，然后子类通过继承和重写修改相关参数，比如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CocoConfig</span><span class="params">(Config)</span>:</span></span><br><span class="line">    <span class="string">"""Configuration for training on MS COCO.</span></span><br><span class="line"><span class="string">    Derives from the base Config class and overrides values specific</span></span><br><span class="line"><span class="string">    to the COCO dataset.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment"># Give the configuration a recognizable name</span></span><br><span class="line">    NAME = <span class="string">"coco"</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># We use a GPU with 12GB memory, which can fit two images.</span></span><br><span class="line">    <span class="comment"># Adjust down if you use a smaller GPU.</span></span><br><span class="line">    IMAGES_PER_GPU = <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Uncomment to train on 8 GPUs (default is 1)</span></span><br><span class="line">    <span class="comment"># GPU_COUNT = 8</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Number of classes (including background)</span></span><br><span class="line">    NUM_CLASSES = <span class="number">1</span> + <span class="number">80</span>  <span class="comment"># COCO has 80 classes</span></span><br></pre></td></tr></table></figure>
+<p>这个部分需要注意的是：对比数据集的继承模式，Config类的变量基本全是类变量，而只有如下几个为实例变量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="string">"""Set values of computed attributes."""</span></span><br><span class="line">    <span class="comment"># Effective batch size</span></span><br><span class="line">    self.BATCH_SIZE = self.IMAGES_PER_GPU * self.GPU_COUNT</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Input image size</span></span><br><span class="line">    self.IMAGE_SHAPE = np.array(</span><br><span class="line">        [self.IMAGE_MAX_DIM, self.IMAGE_MAX_DIM, <span class="number">3</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Compute backbone size from input image size</span></span><br><span class="line">    self.BACKBONE_SHAPES = np.array(</span><br><span class="line">        [[int(math.ceil(self.IMAGE_SHAPE[<span class="number">0</span>] / stride)),</span><br><span class="line">          int(math.ceil(self.IMAGE_SHAPE[<span class="number">1</span>] / stride))]</span><br><span class="line">         <span class="keyword">for</span> stride <span class="keyword">in</span> self.BACKBONE_STRIDES])</span><br></pre></td></tr></table></figure>
+<h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><p><strong>mask的获取：</strong>在标注软件中获取到了标记多边形区域的点集，一对点集标识一个区域，所以掩码的格式为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">masks: A bool array of shape [height, width, instance count] <span class="keyword">with</span></span><br><span class="line">    a binary mask per instance.</span><br><span class="line">class_ids: a <span class="number">1</span>D array of <span class="class"><span class="keyword">class</span> <span class="title">IDs</span> <span class="title">of</span> <span class="title">the</span> <span class="title">instance</span> <span class="title">masks</span>.</span></span><br></pre></td></tr></table></figure>
+<p>在获得点集对后，通过以下函数产生标记区域像素数组：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i, p <span class="keyword">in</span> enumerate(info[<span class="string">"polygons"</span>]):</span><br><span class="line">    <span class="comment"># Get indexes of pixels inside the polygon and set them to 1</span></span><br><span class="line">    <span class="comment"># 注意这里的x,y是反过来的</span></span><br><span class="line">    rr, cc = skimage.draw.polygon(p[<span class="string">'all_points_y'</span>], p[<span class="string">'all_points_x'</span>])</span><br><span class="line">    mask[rr, cc, i] = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>一个获取掩码和显示掩码的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># visulize mask </span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> skimage</span><br><span class="line"><span class="keyword">from</span> skimage.draw <span class="keyword">import</span> polygon</span><br><span class="line"><span class="keyword">import</span> visualize</span><br><span class="line"></span><br><span class="line">all_points_x = [<span class="number">437</span>, <span class="number">438</span>, <span class="number">439</span>, <span class="number">444</span>, <span class="number">445</span>, <span class="number">522</span>, <span class="number">527</span>, <span class="number">522</span>, <span class="number">520</span>, <span class="number">438</span>, <span class="number">436</span>, <span class="number">437</span>]</span><br><span class="line">all_points_y = [<span class="number">511</span>, <span class="number">555</span>, <span class="number">598</span>, <span class="number">630</span>, <span class="number">635</span>, <span class="number">634</span>, <span class="number">625</span>, <span class="number">506</span>, <span class="number">497</span>, <span class="number">500</span>, <span class="number">513</span>, <span class="number">514</span>]</span><br><span class="line">image_dir = os.path.join(ROOT_DIR, <span class="string">"datasets/test/1.jpg"</span>)</span><br><span class="line">image = skimage.io.imread(image_dir)</span><br><span class="line">height, width = image.shape[:<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">mask = np.zeros([height, width, <span class="number">1</span>],</span><br><span class="line">                dtype=np.uint8)</span><br><span class="line"></span><br><span class="line">rr, cc = skimage.draw.polygon(all_points_y, all_points_x)</span><br><span class="line">mask[rr, cc, <span class="number">0</span>] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">visualize.display_top_masks(image, mask, <span class="number">1</span>, <span class="string">"car"</span>)</span><br></pre></td></tr></table></figure>
+<p> <img src="/Users/moubinhao/Library/Application Support/typora-user-images/image-20181010111745240.png" alt="image-20181010111745240"></p>
+<h3 id="训练自己的模型"><a href="#训练自己的模型" class="headerlink" title="训练自己的模型"></a>训练自己的模型</h3><hr>
+<pre><code>这部分主要是通过修改train_shapes.ipynb和参考coco以及balloon的某些代码完成。
+</code></pre><h4 id="Step-1-加载Configuration-和-Dataset"><a href="#Step-1-加载Configuration-和-Dataset" class="headerlink" title="Step 1. 加载Configuration 和 Dataset"></a>Step 1. 加载Configuration 和 Dataset</h4><pre><code>要训练自己的模型首先需要加载自己的配置和数据集，需要分别继承config.py和utils.Dataset(object)来实现。我们专门建立一个.py文件来实现，如huaxi.py（这部分可以参考coco.py或者balloon.py来实现）：
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">############################################################</span></span><br><span class="line"><span class="comment">#  Configurations</span></span><br><span class="line"><span class="comment">############################################################</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HuaxiConfig</span><span class="params">(Config)</span>:</span></span><br><span class="line">    <span class="string">"""Configuration for training on the toy  dataset.</span></span><br><span class="line"><span class="string">    Derives from the base Config class and overrides some values.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment"># Give the configuration a recognizable name</span></span><br><span class="line">    NAME = <span class="string">"huaxi"</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># We use a GPU with 12GB memory, which can fit two images.</span></span><br><span class="line">    <span class="comment"># Adjust down if you use a smaller GPU.</span></span><br><span class="line">    IMAGES_PER_GPU = <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Number of classes (including background)</span></span><br><span class="line">    NUM_CLASSES = <span class="number">1</span> + <span class="number">2</span>  <span class="comment"># Background + classes</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Number of training steps per epoch</span></span><br><span class="line">    STEPS_PER_EPOCH = <span class="number">100</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Skip detections with &lt; 90% confidence</span></span><br><span class="line">    DETECTION_MIN_CONFIDENCE = <span class="number">0.9</span></span><br></pre></td></tr></table></figure>
+<p>载入数据集代码结构如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HuaxiDataset</span><span class="params">(utils.Dataset)</span>:</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">load_huaxi</span><span class="params">(self, dataset_dir, subset)</span>:</span></span><br><span class="line">    	<span class="string">"""Load a subset of the Balloon dataset.</span></span><br><span class="line"><span class="string">        dataset_dir: Root directory of the dataset.</span></span><br><span class="line"><span class="string">        subset: Subset to load: train or val</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        .......</span><br><span class="line">        <span class="comment"># Add classes. We have only one class to add.</span></span><br><span class="line">        self.add_class(<span class="string">"huaxi"</span>, <span class="number">1</span>, <span class="string">"malignant"</span>)</span><br><span class="line">        self.add_class(<span class="string">"huaxi"</span>, <span class="number">2</span>, <span class="string">"optimum"</span>)</span><br><span class="line">        <span class="comment"># Add image.</span></span><br><span class="line">      	self.add_image(</span><br><span class="line">                <span class="string">"huaxi"</span>,</span><br><span class="line">                image_id=a[<span class="string">'filename'</span>],  <span class="comment"># use file name as a unique image id</span></span><br><span class="line">                path=image_path,</span><br><span class="line">                width=width, height=height,</span><br><span class="line">                class_id=name_id,</span><br><span class="line">                polygons=polygons)</span><br><span class="line">     	........</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">load_mask</span><span class="params">(self, image_id)</span>:</span></span><br><span class="line">        <span class="string">"""Generate instance masks for an image.</span></span><br><span class="line"><span class="string">       Returns:</span></span><br><span class="line"><span class="string">        masks: A bool array of shape [height, width, instance count] with</span></span><br><span class="line"><span class="string">            one mask per instance.</span></span><br><span class="line"><span class="string">        class_ids: a 1D array of class IDs of the instance masks.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">		......</span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">image_reference</span><span class="params">(self, image_id)</span>:</span></span><br><span class="line">        <span class="string">"""Return the path of the image."""</span></span><br><span class="line">  		.........</span><br></pre></td></tr></table></figure>
+<pre><code>load_huaxi读取JSON文件，主要调用内部的add_class和add_image函数来构建数据集。load_mask通过绘制多边形为图像中的每个对象生成mask。image_reference只是返回一个字符串，用于识别图像以进行调试， 这里它只是返回图像文件的路径。同时，父类默认调用load_image函数处理加载图像， 边界框也从mask动态生成。
+
+在加载完配置和数据后，可以通过检视数据来验证正确性。这里主要参考inspect_data.ipynb和samples/balloon/inspect_balloon_data.ipynb两个文件。
+</code></pre><h4 id="Step-2-Create-Model"><a href="#Step-2-Create-Model" class="headerlink" title="Step 2. Create Model"></a>Step 2. Create Model</h4><pre><code>第二步建立模型，直接调用model.MaskRCNN来实现。
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model = modellib.MaskRCNN(mode=<span class="string">"training"</span>, config=config, model_dir=MODEL_DIR)</span><br></pre></td></tr></table></figure>
+<pre><code>在源码的train_shapes示例中使用了迁移学习。也就是说并不是从头开始训练模型，而是使用了其他数据集的权重开始进行训练。**这部分我还没有搞得太明白，这样做对于差距比较大的数据集没有影响吗？暂时还没发现这个源代码从头训练的示例。**
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Which weights to start with?</span></span><br><span class="line">init_with = <span class="string">"coco"</span>  <span class="comment"># imagenet, coco, or last</span></span><br><span class="line">print(COCO_MODEL_PATH)</span><br><span class="line"><span class="keyword">if</span> init_with == <span class="string">"imagenet"</span>:</span><br><span class="line">    model.load_weights(model.get_imagenet_weights(), by_name=<span class="keyword">True</span>)</span><br><span class="line"><span class="keyword">elif</span> init_with == <span class="string">"coco"</span>:</span><br><span class="line">    <span class="comment"># Load weights trained on MS COCO, but skip layers that</span></span><br><span class="line">    <span class="comment"># are different due to the different number of classes</span></span><br><span class="line">    <span class="comment"># See README for instructions to download the COCO weights</span></span><br><span class="line">    model.load_weights(COCO_MODEL_PATH, by_name=<span class="keyword">True</span>,</span><br><span class="line">                       exclude=[<span class="string">"mrcnn_class_logits"</span>, <span class="string">"mrcnn_bbox_fc"</span>, </span><br><span class="line">                                <span class="string">"mrcnn_bbox"</span>, <span class="string">"mrcnn_mask"</span>])</span><br><span class="line"><span class="keyword">elif</span> init_with == <span class="string">"last"</span>:</span><br><span class="line">    <span class="comment"># Load the last model you trained and continue training</span></span><br><span class="line">    model.load_weights(model.find_last()[<span class="number">1</span>], by_name=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="Step-3-Training"><a href="#Step-3-Training" class="headerlink" title="Step 3. Training"></a>Step 3. Training</h4><p>Train in two stages:</p>
+<ol>
+<li><p>Only the heads. Here we’re freezing all the backbone layers and  training only the randomly initialized layers (i.e. the ones that we  didn’t use pre-trained weights from MS COCO). To train only the head  layers, pass <code>layers=&#39;heads&#39;</code> to the <code>train()</code> function.</p>
+</li>
+<li><p>Fine-tune all layers. For this simple example it’s not necessary, but we’re including it to show the process. Simply pass <code>layers=&quot;all</code> to train all layers.</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">model.train(dataset_train, dataset_val, </span><br><span class="line">            learning_rate=config.LEARNING_RATE, </span><br><span class="line">            epochs=<span class="number">1</span>, </span><br><span class="line">            layers=<span class="string">'heads'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span><span class="params">(self, train_dataset, val_dataset, learning_rate, epochs, layers)</span>:</span></span><br><span class="line">     <span class="string">"""Train the model.</span></span><br><span class="line"><span class="string">     	train_dataset, val_dataset: Training and validation Dataset objects.</span></span><br><span class="line"><span class="string">        learning_rate: The learning rate to train with</span></span><br><span class="line"><span class="string">        epochs: Number of training epochs. Note that previous training epochs</span></span><br><span class="line"><span class="string">                are considered to be done alreay, so this actually determines</span></span><br><span class="line"><span class="string">                the epochs to train in total rather than in this particaular</span></span><br><span class="line"><span class="string">                call.</span></span><br><span class="line"><span class="string">        layers: Allows selecting wich layers to train. It can be:</span></span><br><span class="line"><span class="string">            - A regular expression to match layer names to train</span></span><br><span class="line"><span class="string">            - One of these predefined values:</span></span><br><span class="line"><span class="string">              heaads: The RPN, classifier and mask heads of the network</span></span><br><span class="line"><span class="string">              all: All the layers</span></span><br><span class="line"><span class="string">              3+: Train Resnet stage 3 and up</span></span><br><span class="line"><span class="string">              4+: Train Resnet stage 4 and up</span></span><br><span class="line"><span class="string">              5+: Train Resnet stage 5 and up</span></span><br><span class="line"><span class="string">        """</span></span><br></pre></td></tr></table></figure>
+<pre><code>通过train函数可以看出，调用该函数时可以任意指定需要训练的层。
+</code></pre><h3 id="Issues-收集"><a href="#Issues-收集" class="headerlink" title="Issues 收集"></a>Issues 收集</h3><hr>
+<h4 id="1-关于pycharm-和-jupyter-notebook-导入模块差异的问题"><a href="#1-关于pycharm-和-jupyter-notebook-导入模块差异的问题" class="headerlink" title="1.关于pycharm 和 jupyter notebook 导入模块差异的问题"></a>1.关于pycharm 和 jupyter notebook 导入模块差异的问题</h4><pre><code>在学习Mask_RCNN源码的时候，遇到一个有关导入模块差异的问题，硬是浪费了不少时间。
+</code></pre><ul>
+<li><h6 id="使用pycharm-不建议使用"><a href="#使用pycharm-不建议使用" class="headerlink" title="使用pycharm(不建议使用)"></a>使用pycharm(不建议使用)</h6><p> 如果通过pycharm运行jupyter notebook, pycharm会自动将项目的根目录加入到sys.path中，这是因为pycharm中有加入根目录的选项，如下图所示。</p>
+<p> <img src="/var/folders/cy/fsw71sr97v11myb_y8h56bn00000gn/T/abnerworks.Typora/image-20180828144900773.png" alt="image-20180828144900773"></p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">ROOT_DIR=os.getcwd()</span><br><span class="line">print(ROOT_DIR)</span><br><span class="line"><span class="keyword">if</span> ROOT_DIR.endswith(<span class="string">'huaxi'</span>):</span><br><span class="line">    ROOT_DIR = os.path.dirname(ROOT_DIR)</span><br><span class="line">sys.path.append(ROOT_DIR)</span><br><span class="line">sys.path.insert(<span class="number">1</span>, ROOT_DIR)</span><br><span class="line">print(ROOT_DIR)</span><br><span class="line">print(sys.path)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\rangermbh\PycharmProjects\Mask_RCNN_2<span class="number">.1</span>\huaxi</span><br><span class="line">C:\Users\rangermbh\PycharmProjects\Mask_RCNN_2<span class="number">.1</span></span><br><span class="line">[<span class="string">''</span>, <span class="string">'C:\\Users\\rangermbh\\PycharmProjects\\Mask_RCNN_2.1'</span>, <span class="string">'D:\\programSoft\\Anaconda3\\python36.zip'</span>, <span class="string">'D:\\programSoft\\Anaconda3\\DLLs'</span>, <span class="string">'D:\\programSoft\\Anaconda3\\lib'</span>, <span class="string">'D:\\programSoft\\Anaconda3'</span>, <span class="string">'D:\\programSoft\\Anaconda3\\lib\\site-packages'</span>, <span class="string">'D:\\programSoft\\Anaconda3\\lib\\site-packages\\pip-10.0.1-py3.6.egg'</span>, <span class="string">'D:\\programSoft\\Anaconda3\\lib\\site-packages\\mask_rcnn-2.1-py3.6.egg'</span>, <span class="string">'D:\\programSoft\\Anaconda3\\lib\\site-packages\\pycocotools-2.0-py3.6-win-amd64.egg'</span>, <span class="string">'D:\\programSoft\\Anaconda3\\lib\\site-packages\\win32'</span>, <span class="string">'D:\\programSoft\\Anaconda3\\lib\\site-packages\\win32\\lib'</span>, <span class="string">'D:\\programSoft\\Anaconda3\\lib\\site-packages\\Pythonwin'</span>, <span class="string">'D:\\programSoft\\Anaconda3\\lib\\site-packages\\IPython\\extensions'</span>, <span class="string">'C:\\Users\\rangermbh\\.ipython'</span>, <span class="string">'C:\\Users\\rangermbh\\PycharmProjects\\Mask_RCNN_2.1'</span>]</span><br></pre></td></tr></table></figure>
+<p><strong>使用pycharm操作还有个问题：有些模块的类无法识别（在pycharm中），但在浏览器中没有问题。</strong></p>
+<blockquote>
+<p>比如在pycharm中使用 os.getcwd()无法识别当前目录，而是识别的根目录。但如果通过pycharm启动jupyter然后通过浏览器访问便没有问题，但这样做pycharm和jupyter的同步是个很大的问题，经常在浏览器运行后无法同步到文件，导致浏览器运行的结果丢失。</p>
+</blockquote>
+<ul>
+<li><p>直接在终端运行jupyter notebook（推荐使用）</p>
+<blockquote>
+<p>直接使用jupyter notebook并使用浏览器有以下几个问题：</p>
+<ol>
+<li>jupyter notebook不会自动在sys.path中加入根目录，导致很多模块导入出现问题。</li>
+<li>jupyter 默认不开启代码补全功能，需要修改配置文件或者下载插件。</li>
+</ol>
+</blockquote>
+<pre><code>对于第一个问题：我们可以通过sys.path.append(ROOT_DIR)手动添加需要的目录。但是这些目录是添加到sys.path列表的最后，导入模块的优先级是按照列表排序的，所以如果需要导入的模块和排序靠前的某个lib模块重合便会导致无法识别模块。比如Mask_RCNN根目录下有一个utils.py，而排在列表前的&apos;D:\\programSoft\\Anaconda3\\lib\\site-packages“也包含utils.py, 所以无法找到utils.Dataset类。
+</code></pre><p> <strong>解决办法：通过sys.path.insert()将根目录插入列表最前面。</strong></p>
+<pre><code>对于第二个问题：安装一个插件后，勾选Hinterland即启用了代码自动补全。该插件还有很多的功能，可以进一步了解一下。
+</code></pre> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pip install jupyter_contrib_nbextensions</span><br><span class="line">jupyter contrib nbextension install --user</span><br><span class="line">pip install jupyter_nbextensions_configurator</span><br><span class="line">jupyter nbextensions_configurator enable --user</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="2-关于源码keras版本兼容性问题"><a href="#2-关于源码keras版本兼容性问题" class="headerlink" title="2.关于源码keras版本兼容性问题"></a>2.关于源码keras版本兼容性问题</h4><pre><code>[# issue 662](https://github.com/matterport/Mask_RCNN/pull/662): 源码keras版本是2.0.8, keras.engine.topology已经被弃用，将model里的topology换成saving便可解决问题。
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">---------------------------------------------------------------------------</span><br><span class="line">AttributeError                            Traceback (most recent call last)</span><br><span class="line">&lt;ipython-input<span class="number">-8</span><span class="number">-596752</span>af0da9&gt; <span class="keyword">in</span> &lt;module&gt;()</span><br><span class="line">     <span class="number">10</span>     model.load_weights(COCO_MODEL_PATH, by_name=<span class="keyword">True</span>,</span><br><span class="line">     <span class="number">11</span>                        exclude=[<span class="string">"mrcnn_class_logits"</span>, <span class="string">"mrcnn_bbox_fc"</span>, </span><br><span class="line">---&gt; 12                                 "mrcnn_bbox", "mrcnn_mask"])</span><br><span class="line">     <span class="number">13</span> <span class="keyword">elif</span> init_with == <span class="string">"last"</span>:</span><br><span class="line">     <span class="number">14</span>     <span class="comment"># Load the last model you trained and continue training</span></span><br><span class="line"></span><br><span class="line">~/githubDownload/Mask_RCNN<span class="number">-2.1</span>/model.py <span class="keyword">in</span> load_weights(self, filepath, by_name, exclude)</span><br><span class="line">   <span class="number">2035</span> </span><br><span class="line">   <span class="number">2036</span>         <span class="keyword">if</span> by_name:</span><br><span class="line">-&gt; 2037             saving.load_weights_from_hdf5_group_by_name(f, layers)</span><br><span class="line">   <span class="number">2038</span>         <span class="keyword">else</span>:</span><br><span class="line">   <span class="number">2039</span>             saving.load_weights_from_hdf5_group(f, layers)</span><br><span class="line"></span><br><span class="line">AttributeError: module <span class="string">'keras.engine.topology'</span> has no attribute <span class="string">'load_weights_from_hdf5_group_by_name'</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/29/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/../images/image.png" alt="John Doe">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mask-RCNN源码学习"><span class="nav-text">Mask_RCNN源码学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装和部署"><span class="nav-text">安装和部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据集"><span class="nav-text">数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#coco数据集有自己的格式和API-pycocotools"><span class="nav-text">coco数据集有自己的格式和API (pycocotools)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#balloon使用使用VGG-Image-Annotator-JSON格式如下"><span class="nav-text">balloon使用使用VGG_Image_Annotator, JSON格式如下:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型参数配置"><span class="nav-text">模型参数配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#源码分析"><span class="nav-text">源码分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练自己的模型"><span class="nav-text">训练自己的模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-1-加载Configuration-和-Dataset"><span class="nav-text">Step 1. 加载Configuration 和 Dataset</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-2-Create-Model"><span class="nav-text">Step 2. Create Model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Step-3-Training"><span class="nav-text">Step 3. Training</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Issues-收集"><span class="nav-text">Issues 收集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-关于pycharm-和-jupyter-notebook-导入模块差异的问题"><span class="nav-text">1.关于pycharm 和 jupyter notebook 导入模块差异的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#使用pycharm-不建议使用"><span class="nav-text">使用pycharm(不建议使用)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-关于源码keras版本兼容性问题"><span class="nav-text">2.关于源码keras版本兼容性问题</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright"> &copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Gemini</a> v6.4.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.4.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.4.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.2"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
