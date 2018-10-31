@@ -112,17 +112,17 @@
 <meta name="keywords" content="Object Detection,Neural Network">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mask_RCNN源码学习笔记">
-<meta property="og:url" content="http://yoursite.com/2018/10/29/Mask-RCNN源码学习笔记/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/10/29/Mask-RCNN学习笔记/index.html">
 <meta property="og:site_name" content="Rangermbh">
 <meta property="og:description" content="Mask_RCNN源码学习Mask_RCNN GitHub 地址 安装和部署    详细步骤参考源码主页  Install dependencies 1pip3 install -r requirements.txt  Clone this repository  Run setup from the repository root directory 1python3 setup.py inst">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/Users/moubinhao/Library/Application%20Support/typora-user-images/image-20181010111745240.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/29/Mask-RCNN学习笔记/image-20181010111745240.png">
 <meta property="og:image" content="http://yoursite.com/var/folders/cy/fsw71sr97v11myb_y8h56bn00000gn/T/abnerworks.Typora/image-20180828144900773.png">
-<meta property="og:updated_time" content="2018-10-31T08:23:20.914Z">
+<meta property="og:updated_time" content="2018-10-31T09:16:25.577Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mask_RCNN源码学习笔记">
 <meta name="twitter:description" content="Mask_RCNN源码学习Mask_RCNN GitHub 地址 安装和部署    详细步骤参考源码主页  Install dependencies 1pip3 install -r requirements.txt  Clone this repository  Run setup from the repository root directory 1python3 setup.py inst">
-<meta name="twitter:image" content="http://yoursite.com/Users/moubinhao/Library/Application%20Support/typora-user-images/image-20181010111745240.png">
+<meta name="twitter:image" content="http://yoursite.com/2018/10/29/Mask-RCNN学习笔记/image-20181010111745240.png">
 
 
 
@@ -131,7 +131,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/10/29/Mask-RCNN源码学习笔记/">
+  <link rel="canonical" href="http://yoursite.com/2018/10/29/Mask-RCNN学习笔记/">
 
 
 
@@ -340,7 +340,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/29/Mask-RCNN源码学习笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/29/Mask-RCNN学习笔记/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Rangermbh">
@@ -399,7 +399,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-10-31 16:23:20" itemprop="dateModified" datetime="2018-10-31T16:23:20+08:00">2018-10-31</time>
+                <time title="Modified: 2018-10-31 17:16:25" itemprop="dateModified" datetime="2018-10-31T17:16:25+08:00">2018-10-31</time>
               
             
           </span>
@@ -500,7 +500,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i, p <span class="keyword">in</span> enumerate(info[<span class="string">"polygons"</span>]):</span><br><span class="line">    <span class="comment"># Get indexes of pixels inside the polygon and set them to 1</span></span><br><span class="line">    <span class="comment"># 注意这里的x,y是反过来的</span></span><br><span class="line">    rr, cc = skimage.draw.polygon(p[<span class="string">'all_points_y'</span>], p[<span class="string">'all_points_x'</span>])</span><br><span class="line">    mask[rr, cc, i] = <span class="number">1</span></span><br></pre></td></tr></table></figure>
 <p>一个获取掩码和显示掩码的例子：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># visulize mask </span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> skimage</span><br><span class="line"><span class="keyword">from</span> skimage.draw <span class="keyword">import</span> polygon</span><br><span class="line"><span class="keyword">import</span> visualize</span><br><span class="line"></span><br><span class="line">all_points_x = [<span class="number">437</span>, <span class="number">438</span>, <span class="number">439</span>, <span class="number">444</span>, <span class="number">445</span>, <span class="number">522</span>, <span class="number">527</span>, <span class="number">522</span>, <span class="number">520</span>, <span class="number">438</span>, <span class="number">436</span>, <span class="number">437</span>]</span><br><span class="line">all_points_y = [<span class="number">511</span>, <span class="number">555</span>, <span class="number">598</span>, <span class="number">630</span>, <span class="number">635</span>, <span class="number">634</span>, <span class="number">625</span>, <span class="number">506</span>, <span class="number">497</span>, <span class="number">500</span>, <span class="number">513</span>, <span class="number">514</span>]</span><br><span class="line">image_dir = os.path.join(ROOT_DIR, <span class="string">"datasets/test/1.jpg"</span>)</span><br><span class="line">image = skimage.io.imread(image_dir)</span><br><span class="line">height, width = image.shape[:<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">mask = np.zeros([height, width, <span class="number">1</span>],</span><br><span class="line">                dtype=np.uint8)</span><br><span class="line"></span><br><span class="line">rr, cc = skimage.draw.polygon(all_points_y, all_points_x)</span><br><span class="line">mask[rr, cc, <span class="number">0</span>] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">visualize.display_top_masks(image, mask, <span class="number">1</span>, <span class="string">"car"</span>)</span><br></pre></td></tr></table></figure>
-<p> <img src="/Users/moubinhao/Library/Application Support/typora-user-images/image-20181010111745240.png" alt="image-20181010111745240"></p>
+<p> <img src="/2018/10/29/Mask-RCNN学习笔记/image-20181010111745240.png" alt="image-20181010111745240"></p>
 <h3 id="训练自己的模型"><a href="#训练自己的模型" class="headerlink" title="训练自己的模型"></a>训练自己的模型</h3><hr>
 <p>  这部分主要是通过修改train_shapes.ipynb和参考coco以及balloon的某些代码完成。</p>
 <h4 id="Step-1-加载Configuration-和-Dataset"><a href="#Step-1-加载Configuration-和-Dataset" class="headerlink" title="Step 1. 加载Configuration 和 Dataset"></a>Step 1. 加载Configuration 和 Dataset</h4><p>  要训练自己的模型首先需要加载自己的配置和数据集，需要分别继承config.py和utils.Dataset(object)来实现。我们专门建立一个.py文件来实现，如huaxi.py（这部分可以参考coco.py或者balloon.py来实现）：</p>
