@@ -108,28 +108,28 @@
 
 
 
-  <meta name="description" content="一切从线性模型开始线性模型或者线性分类器是机器学习基础模型，神经网络本质上就是线性模型+非线性变换。现在有一个线性映射：$$f(x_i,W,b) = Wx_i + b$$其中$x_i$表示由某张图片所有像素构成的列向量，大小为[D$\times$1]，而权重矩阵$W$的大小为[K$\times$D]，偏置向量b的大小为[k$\times$1]。比如对于CIFAR-10来说，$x_i$包含了第$i">
+  <meta name="description" content="一切从线性模型开始线性模型或者线性分类器是机器学习基础模型，神经网络本质上就是线性模型+非线性变换。现在有一个线性映射：  f(x_i,W,b) = Wx_i + b其中$ x_i $表示由某张图片所有像素构成的列向量，大小为[D  \times \ 1]，而权重矩阵$W$的大小为[K$\times$D]，偏置向量b的大小为[k$\times$1]。比如对于CIFAR-10来说，$x_i$包含了">
 <meta name="keywords" content="Neural Network,CNN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="卷积神经网络CNN的那些事">
 <meta property="og:url" content="http://yoursite.com/2018/11/07/卷积神经网络CNN的那些事/index.html">
 <meta property="og:site_name" content="Rangermbh">
-<meta property="og:description" content="一切从线性模型开始线性模型或者线性分类器是机器学习基础模型，神经网络本质上就是线性模型+非线性变换。现在有一个线性映射：$$f(x_i,W,b) = Wx_i + b$$其中$x_i$表示由某张图片所有像素构成的列向量，大小为[D$\times$1]，而权重矩阵$W$的大小为[K$\times$D]，偏置向量b的大小为[k$\times$1]。比如对于CIFAR-10来说，$x_i$包含了第$i">
+<meta property="og:description" content="一切从线性模型开始线性模型或者线性分类器是机器学习基础模型，神经网络本质上就是线性模型+非线性变换。现在有一个线性映射：  f(x_i,W,b) = Wx_i + b其中$ x_i $表示由某张图片所有像素构成的列向量，大小为[D  \times \ 1]，而权重矩阵$W$的大小为[K$\times$D]，偏置向量b的大小为[k$\times$1]。比如对于CIFAR-10来说，$x_i$包含了">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/11/07/卷积神经网络CNN的那些事/linear%20classification.png">
-<meta property="og:image" content="http://yoursite.com/Users/moubinhao/Blog/source/_posts/卷积神经网络CNN的那些事/bias_trick.png">
-<meta property="og:image" content="http://yoursite.com/Users/moubinhao/Blog/source/_posts/卷积神经网络CNN的那些事/svm_softmax.png">
+<meta property="og:image" content="http://yoursite.com/2018/11/07/卷积神经网络CNN的那些事/bias_trick.png">
+<meta property="og:image" content="http://yoursite.com/2018/11/07/卷积神经网络CNN的那些事/svm_softmax.png">
 <meta property="og:image" content="http://yoursite.com/2018/11/07/卷积神经网络CNN的那些事/neural%20network.png">
-<meta property="og:image" content="http://yoursite.com/Users/moubinhao/Blog/source/_posts/卷积神经网络CNN的那些事/cnn1.png">
-<meta property="og:image" content="http://yoursite.com/Users/moubinhao/Blog/source/_posts/卷积神经网络CNN的那些事/cnn2.png">
+<meta property="og:image" content="http://yoursite.com/2018/11/07/卷积神经网络CNN的那些事/cnn1.png">
+<meta property="og:image" content="http://yoursite.com/2018/11/07/卷积神经网络CNN的那些事/cnn2.png">
 <meta property="og:image" content="http://yoursite.com/2018/11/07/卷积神经网络CNN的那些事/cnn3.png">
-<meta property="og:image" content="http://yoursite.com/Users/moubinhao/Blog/source/_posts/卷积神经网络CNN的那些事/cnn4.png">
+<meta property="og:image" content="http://yoursite.com/2018/11/07/卷积神经网络CNN的那些事/cnn4.png">
 <meta property="og:image" content="http://yoursite.com/2018/11/07/卷积神经网络CNN的那些事/cnn_matr_mul.png">
 <meta property="og:image" content="http://yoursite.com/2018/11/07/卷积神经网络CNN的那些事/max_pooling.png">
-<meta property="og:updated_time" content="2018-11-08T09:42:31.430Z">
+<meta property="og:updated_time" content="2018-11-08T10:24:06.776Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="卷积神经网络CNN的那些事">
-<meta name="twitter:description" content="一切从线性模型开始线性模型或者线性分类器是机器学习基础模型，神经网络本质上就是线性模型+非线性变换。现在有一个线性映射：$$f(x_i,W,b) = Wx_i + b$$其中$x_i$表示由某张图片所有像素构成的列向量，大小为[D$\times$1]，而权重矩阵$W$的大小为[K$\times$D]，偏置向量b的大小为[k$\times$1]。比如对于CIFAR-10来说，$x_i$包含了第$i">
+<meta name="twitter:description" content="一切从线性模型开始线性模型或者线性分类器是机器学习基础模型，神经网络本质上就是线性模型+非线性变换。现在有一个线性映射：  f(x_i,W,b) = Wx_i + b其中$ x_i $表示由某张图片所有像素构成的列向量，大小为[D  \times \ 1]，而权重矩阵$W$的大小为[K$\times$D]，偏置向量b的大小为[k$\times$1]。比如对于CIFAR-10来说，$x_i$包含了">
 <meta name="twitter:image" content="http://yoursite.com/2018/11/07/卷积神经网络CNN的那些事/linear%20classification.png">
 
 
@@ -407,7 +407,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-11-08 17:42:31" itemprop="dateModified" datetime="2018-11-08T17:42:31+08:00">2018-11-08</time>
+                <time title="Modified: 2018-11-08 18:24:06" itemprop="dateModified" datetime="2018-11-08T18:24:06+08:00">2018-11-08</time>
               
             
           </span>
@@ -459,13 +459,15 @@
 
       
         <p><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script></p>
-<h2 id="一切从线性模型开始"><a href="#一切从线性模型开始" class="headerlink" title="一切从线性模型开始"></a>一切从线性模型开始</h2><p>线性模型或者线性分类器是机器学习基础模型，神经网络本质上就是线性模型+非线性变换。现在有一个线性映射：<br>$$<br>f(x_i,W,b) = Wx_i + b<br>$$<br>其中$x_i$表示由某张图片所有像素构成的列向量，大小为[D$\times$1]，而权重矩阵$W$的大小为[K$\times$D]，偏置向量b的大小为[k$\times$1]。比如对于CIFAR-10来说，$x_i$包含了第$i$张图片的所有像素的列向量，大小为[3072$\times$1], $W$为[10$\times$3072]的权重矩阵，$b$的大小为[10$\times$1]，最后的输出为[10$\times1$]的向量，向量中每一个值代表每一类的得分。比如下图的例子：</p>
+<h2 id="一切从线性模型开始"><a href="#一切从线性模型开始" class="headerlink" title="一切从线性模型开始"></a>一切从线性模型开始</h2><p>线性模型或者线性分类器是机器学习基础模型，神经网络本质上就是线性模型+非线性变换。现在有一个线性映射：</p>
+<script type="math/tex; mode=display">
+f(x_i,W,b) = Wx_i + b</script><p>其中$ x_i $表示由某张图片所有像素构成的列向量，大小为[D  \times \ 1]，而权重矩阵$W$的大小为[K$\times$D]，偏置向量b的大小为[k$\times$1]。比如对于CIFAR-10来说，$x_i$包含了第$i$张图片的所有像素的列向量，大小为[3072$\times$1], $W$为[10$\times$3072]的权重矩阵，$b$的大小为[10$\times$1]，最后的输出为[10$\times1$]的向量，向量中每一个值代表每一类的得分。比如下图的例子：</p>
 <p><img src="/2018/11/07/卷积神经网络CNN的那些事/linear classification.png" alt="linear classification"></p>
 <p>上图的图片只有4个像素且没有考虑颜色通道，W每一行对应一个分类器，$f(x_i,W,b)$每一行对应一个类的得分。</p>
 <p>为了计算的方便，一般把$W$和$b$进行组合在一起，则上图就变成了：</p>
-<p><img src="/Users/moubinhao/Blog/source/_posts/卷积神经网络CNN的那些事/bias_trick.png" alt="bias_trick"></p>
+<p><img src="/2018/11/07/卷积神经网络CNN的那些事/bias_trick.png" alt="bias_trick"></p>
 <p>有了分类器以后，按照机器学习的原理，下一步就是定义损失函数，有了损失函数便可以使用梯度下降法等来训练分类器。比如常见的多分类支持向量机损失函数和Softmax损失函数，它们的一个比较如下图：</p>
-<p><img src="/Users/moubinhao/Blog/source/_posts/卷积神经网络CNN的那些事/svm_softmax.png" alt="svm_softmax"></p>
+<p><img src="/2018/11/07/卷积神经网络CNN的那些事/svm_softmax.png" alt="svm_softmax"></p>
 <p>SVM和Softemax的不同是在计算完得分向量后，SVM把这个向量看成每个类的得分，它的损失函数希望他的真实类的得分尽量高于其他类。而Softemax分类器则把得分看做每个类的log probabilities，而且希望真实类的log probabilities尽可能的高。</p>
 <h2 id="从神经网络到卷积神经网络"><a href="#从神经网络到卷积神经网络" class="headerlink" title="从神经网络到卷积神经网络"></a>从神经网络到卷积神经网络</h2><h3 id="什么是神经网络？"><a href="#什么是神经网络？" class="headerlink" title="什么是神经网络？"></a>什么是神经网络？</h3><p>提到神经网络肯定逃不掉线性分类器，按照前面线性分类器的定义，一个简单的神经网络可能就像这样：</p>
 <p>$s = W_2 max(0, W_1x)$，其中$W_1x$就和前面的线性分类器一样，可能得到一个100维的中间向量，而max(0, -)是一个非线性变换。当然这个非线性变换有很多（ReLU, Sigmoid等），我们一般把这些变换叫做激活函数。如果$W_1$的大小为[10$\times$100]，那么最后仍将得到一个[10$\times$1]的分数向量。同理，一个三层的神经网络可以用下面的式子表示：$s = W_3max(0, W_2max(0, W_1x))$。下图分别为2层和3层（不包含输入层）的神经网络例子：</p>
@@ -473,9 +475,9 @@
 <p>从图中可以看出，神经元之间是全连接的，在这种连接下我们来计算一下神经网络参数的大小：</p>
 <p>左边图：很明显第一个权重矩阵的大小为[4$\times$3], bias大小为4; 第二个权重矩阵为[2$\times$4], bias大小为2，所以一共有26个待学习的参数。</p>
 <h3 id="什么是卷积神经网络？"><a href="#什么是卷积神经网络？" class="headerlink" title="什么是卷积神经网络？"></a>什么是卷积神经网络？</h3><p>对于一般的神经网络（CNN）来说，各层之间的神经元采用全连接的方式相连接，这种方式对于图片输入数据来说简直是灾难，比如CIFAR-10的图片大小为32$\times$32$\times$3,随着网络层数的加深，整个网络参数的规模将急剧真大，这是非常浪费的，而且将很快导致过拟合。<br>CNN则很好地利用了图像数据的特征（一般为三维数据），将网络结构进行了更加合理的优化。CNN中的神经层中的神经元都是三维的(width, height, depth)。</p>
-<p><img src="/Users/moubinhao/Blog/source/_posts/卷积神经网络CNN的那些事/cnn1.png" alt="cnn1"></p>
+<p><img src="/2018/11/07/卷积神经网络CNN的那些事/cnn1.png" alt="cnn1"></p>
 <p>准确地说，CNN是一系列神经层的有序队列，CNN的每一层使用一个可微函数将一个激活体转化为另一个激活体。CNN的一般结构有：卷积层(CONV)，池化层(POOL) 和一个全连接层(FC)，比如以下的队列[INPUT -CONV-RELU-POOL-FC]，如下图所示：</p>
-<p><img src="/Users/moubinhao/Blog/source/_posts/卷积神经网络CNN的那些事/cnn2.png" alt="cnn2"></p>
+<p><img src="/2018/11/07/卷积神经网络CNN的那些事/cnn2.png" alt="cnn2"></p>
 <h4 id="卷积层"><a href="#卷积层" class="headerlink" title="卷积层"></a>卷积层</h4><p>卷积层是CNN的核心构件，在前向传播的过程中，Filter沿着长和高的两个方向在输入图片上卷积，然后计算任意位置上输入与Filter之间的点积，这样就会为每个Filter在每个空间位置上生成一个二维的激活图（Activation Map）。</p>
 <p><strong>本地连接和感受野（Local Connectivity and Receptive Field）</strong></p>
 <p>当我们需要处理像图片这样的高维输入时，神经元和神经元之间的全连接是不切实际的。相反，我们将每个神经元只和输入空间的一个局部区域进行连接，而这个连接的空间扩展就是神经元的感受野（<strong>receptive filed）——（也就是filter的大小）</strong>，而且这个连接在depth坐标的扩展永远等于输入的depth。</p>
@@ -495,7 +497,7 @@
 </li>
 <li><p>对于每个Filter来说，将会引入$F \cdot F \cdot D_1$个参数，总共就是$(F \cdot F \cdot D_1) \cdot K $个权重和$K$个偏置</p>
 <p>下面看一个具体的例子。由于三维的数据不好展示，这个例子给出了每个通道（RGB）的切片数据。输入大小$W_1=5，$$H_1=5$， $D_1=3$，卷积层的参数$K=2$，$F=3$，$S=2$，$P=1$。这里一共有两个大小为$3 \times 3$的filter，而且filter在输入空间滑动的步长为$S=2$，所以输出的空间大小为$(5-3+2)/2+1=3$，零值填充为$P=1$。</p>
-<p><img src="/Users/moubinhao/Blog/source/_posts/卷积神经网络CNN的那些事/cnn4.png" alt="cnn4"></p>
+<p><img src="/2018/11/07/卷积神经网络CNN的那些事/cnn4.png" alt="cnn4"></p>
 <p>上图蓝色的为输入（一共3个切片，每片对应一个颜色通道），灰色部分为零值填充，红色部分为两个Filter,绿色部分是两个Filter对应的两个输出，或者说是Activation Map。上图正好是滑动窗口在第一个位置时卷积的过程，由于Filter的大小为$3 \times 3$，所以每次滑动中，Filter都只关注大小$3 \times 3 $的相应输入空间上区域，如图中黑线所示，接着Filter便和相应输入空间位置进行dot计算并加上bias得到相应的输出。</p>
 </li>
 <li><p>转化成矩阵乘法</p>
@@ -510,9 +512,9 @@
 <li><p>总共需要两个参数：Filter的大小$F$，步长$S$</p>
 </li>
 <li><p>卷积后输出的大小为$W_2 \times H_2 \times D_2$，其中</p>
-<p>$W_2 = (W_1-F)/S+1$</p>
-<p>$H_2=(H_1-F)/S+1$</p>
-<p>$D_2= D_1$</p>
+<p>$ W_2 = (W_1-F)/S+1 $</p>
+<p>$ H_2=(H_1-F)/S+1 $</p>
+<p>$ D_2= D_1 $</p>
 </li>
 <li>没有引进任何参数，因为输入代入的是固定的函数，如MAX()，AVERAGE()</li>
 <li>池化层一般不对输入进行零值填充</li>
@@ -524,7 +526,7 @@
 <li>权重矩阵必然很大，而且大部分值为0。</li>
 <li>任何FC都可以转换层CONV层。比如一个具有$K=4096$的FC层，它的输入大小为$7 \times 7 \times 512$，则它可以等同于一个$F=7,P=0,K=4096$的CONV层，也就是说将Filter的大小设置为输入体的大小，则输出的大小为$1 \times 1  \times 4096$，这个结果和FC的输出结果完全相同</li>
 </ul>
-<p>参考：<br>[1]: <a href="http://cs231n.github.io/" target="_blank" rel="noopener">http://cs231n.github.io/</a>    “notes of Standford CS class CS231N”</p>
+<p>参考：</p>
 
       
     </div>
@@ -1222,6 +1224,37 @@
   
 
   
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
 
   
   

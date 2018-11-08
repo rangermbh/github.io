@@ -542,9 +542,9 @@
 <li>jupyter 默认不开启代码补全功能，需要修改配置文件或者下载插件。</li>
 </ol>
 </blockquote>
-<pre><code>对于第一个问题：我们可以通过sys.path.append(ROOT_DIR)手动添加需要的目录。但是这些目录是添加到sys.path列表的最后，导入模块的优先级是按照列表排序的，所以如果需要导入的模块和排序靠前的某个lib模块重合便会导致无法识别模块。比如Mask_RCNN根目录下有一个utils.py，而排在列表前的&apos;D:\\programSoft\\Anaconda3\\lib\\site-packages“也包含utils.py, 所以无法找到utils.Dataset类。
+<pre><code> 对于第一个问题：我们可以通过sys.path.append(ROOT_DIR)手动添加需要的目录。但是这些目录是添加到sys.path列表的最后，导入模块的优先级是按照列表排序的，所以如果需要导入的模块和排序靠前的某个lib模块重合便会导致无法识别模块。比如Mask_RCNN根目录下有一个utils.py，而排在列表前的&#39;D:\\programSoft\\Anaconda3\\lib\\site-packages“也包含utils.py, 所以无法找到utils.Dataset类。
 </code></pre><p> <strong>解决办法：通过sys.path.insert()将根目录插入列表最前面。</strong></p>
-<pre><code>对于第二个问题：安装一个插件后，勾选Hinterland即启用了代码自动补全。该插件还有很多的功能，可以进一步了解一下。
+<pre><code> 对于第二个问题：安装一个插件后，勾选Hinterland即启用了代码自动补全。该插件还有很多的功能，可以进一步了解一下。
 </code></pre> <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pip install jupyter_contrib_nbextensions</span><br><span class="line">jupyter contrib nbextension install --user</span><br><span class="line">pip install jupyter_nbextensions_configurator</span><br><span class="line">jupyter nbextensions_configurator enable --user</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -1247,6 +1247,13 @@
   
 
   
+  
+
+  
+  
+
+  
+
 
   
   
