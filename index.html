@@ -397,7 +397,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-11-08 18:24:06" itemprop="dateModified" datetime="2018-11-08T18:24:06+08:00">2018-11-08</time>
+                <time title="Modified: 2018-11-08 18:42:08" itemprop="dateModified" datetime="2018-11-08T18:42:08+08:00">2018-11-08</time>
               
             
           </span>
@@ -453,7 +453,7 @@
             <p><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script></p>
 <h2 id="一切从线性模型开始"><a href="#一切从线性模型开始" class="headerlink" title="一切从线性模型开始"></a>一切从线性模型开始</h2><p>线性模型或者线性分类器是机器学习基础模型，神经网络本质上就是线性模型+非线性变换。现在有一个线性映射：</p>
 <script type="math/tex; mode=display">
-f(x_i,W,b) = Wx_i + b</script><p>其中$ x_i $表示由某张图片所有像素构成的列向量，大小为[D  \times \ 1]，而权重矩阵$W$的大小为[K$\times$D]，偏置向量b的大小为[k$\times$1]。比如对于CIFAR-10来说，$x_i$包含了第$i$张图片的所有像素的列向量，大小为[3072$\times$1], $W$为[10$\times$3072]的权重矩阵，$b$的大小为[10$\times$1]，最后的输出为[10$\times1$]的向量，向量中每一个值代表每一类的得分。比如下图的例子：</p>
+f(x_i,W,b) = Wx_i + b</script><p>其中$ x_i $表示由某张图片所有像素构成的列向量，大小为[D $\times$ 1]，而权重矩阵$W$的大小为[K$ \times $D]，偏置向量b的大小为[k$ \times$ 1]。比如, 对于CIFAR-10，$x_i$包含了第$i$张图片的所有像素的列向量，大小为[3072$\times$1], $W$为[10$\times$3072]的权重矩阵，$b$的大小为[10$\times$1]，最后的输出为[10$\times1$]的向量，向量中每一个值代表每一类的得分。例子如下图：</p>
 <p><img src="/2018/11/07/卷积神经网络CNN的那些事/linear classification.png" alt="linear classification"></p>
 <p>上图的图片只有4个像素且没有考虑颜色通道，W每一行对应一个分类器，$f(x_i,W,b)$每一行对应一个类的得分。</p>
 <p>为了计算的方便，一般把$W$和$b$进行组合在一起，则上图就变成了：</p>
@@ -519,6 +519,9 @@ f(x_i,W,b) = Wx_i + b</script><p>其中$ x_i $表示由某张图片所有像素�
 <li>任何FC都可以转换层CONV层。比如一个具有$K=4096$的FC层，它的输入大小为$7 \times 7 \times 512$，则它可以等同于一个$F=7,P=0,K=4096$的CONV层，也就是说将Filter的大小设置为输入体的大小，则输出的大小为$1 \times 1  \times 4096$，这个结果和FC的输出结果完全相同</li>
 </ul>
 <p>参考：</p>
+<blockquote id="fn_1">
+<sup>1</sup>. <a href="http://cs231n.github.io" target="_blank" rel="noopener">http://cs231n.github.io</a>    “Notes of Standford CS class CS231N”<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
 
           
         
