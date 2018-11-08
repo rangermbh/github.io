@@ -397,7 +397,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-11-08 15:52:54" itemprop="dateModified" datetime="2018-11-08T15:52:54+08:00">2018-11-08</time>
+                <time title="Modified: 2018-11-08 17:42:31" itemprop="dateModified" datetime="2018-11-08T17:42:31+08:00">2018-11-08</time>
               
             
           </span>
@@ -450,8 +450,9 @@
       
         
           
-            <h2 id="一切从线性模型开始"><a href="#一切从线性模型开始" class="headerlink" title="一切从线性模型开始"></a>一切从线性模型开始</h2><p>线性模型或者线性分类器是机器学习基础模型，神经网络本质上就是线性模型+非线性变换。现在有一个线性映射：<br>$$<br>f(x_i,W,b) = Wx_i + b<br>$$<br>其中$x_i$表示由某张图片所有像素构成的列向量，大小为[D$\times$1]，而权重矩阵$W$的大小为[K$\times$D]，偏置向量b的大小为[k$\times$1]。比如对于CIFAR-10来说，$x_i$包含了第$i$张图片的所有像素的列向量，大小为[3072$\times$1], $W$为[10$\times$3072]的权重矩阵，$b$的大小为[10$\times$1]，最后的输出为[10$\times1$]的向量，向量中每一个值代表每一类的得分。比如下图的例子：</p>
-<p><img src="/Users/moubinhao/Blog/source/_posts/卷积神经网络CNN的那些事/linear classification.png" alt="linear classification"></p>
+            <p><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script></p>
+<h2 id="一切从线性模型开始"><a href="#一切从线性模型开始" class="headerlink" title="一切从线性模型开始"></a>一切从线性模型开始</h2><p>线性模型或者线性分类器是机器学习基础模型，神经网络本质上就是线性模型+非线性变换。现在有一个线性映射：<br>$$<br>f(x_i,W,b) = Wx_i + b<br>$$<br>其中$x_i$表示由某张图片所有像素构成的列向量，大小为[D$\times$1]，而权重矩阵$W$的大小为[K$\times$D]，偏置向量b的大小为[k$\times$1]。比如对于CIFAR-10来说，$x_i$包含了第$i$张图片的所有像素的列向量，大小为[3072$\times$1], $W$为[10$\times$3072]的权重矩阵，$b$的大小为[10$\times$1]，最后的输出为[10$\times1$]的向量，向量中每一个值代表每一类的得分。比如下图的例子：</p>
+<p><img src="/2018/11/07/卷积神经网络CNN的那些事/linear classification.png" alt="linear classification"></p>
 <p>上图的图片只有4个像素且没有考虑颜色通道，W每一行对应一个分类器，$f(x_i,W,b)$每一行对应一个类的得分。</p>
 <p>为了计算的方便，一般把$W$和$b$进行组合在一起，则上图就变成了：</p>
 <p><img src="/Users/moubinhao/Blog/source/_posts/卷积神经网络CNN的那些事/bias_trick.png" alt="bias_trick"></p>
@@ -460,7 +461,7 @@
 <p>SVM和Softemax的不同是在计算完得分向量后，SVM把这个向量看成每个类的得分，它的损失函数希望他的真实类的得分尽量高于其他类。而Softemax分类器则把得分看做每个类的log probabilities，而且希望真实类的log probabilities尽可能的高。</p>
 <h2 id="从神经网络到卷积神经网络"><a href="#从神经网络到卷积神经网络" class="headerlink" title="从神经网络到卷积神经网络"></a>从神经网络到卷积神经网络</h2><h3 id="什么是神经网络？"><a href="#什么是神经网络？" class="headerlink" title="什么是神经网络？"></a>什么是神经网络？</h3><p>提到神经网络肯定逃不掉线性分类器，按照前面线性分类器的定义，一个简单的神经网络可能就像这样：</p>
 <p>$s = W_2 max(0, W_1x)$，其中$W_1x$就和前面的线性分类器一样，可能得到一个100维的中间向量，而max(0, -)是一个非线性变换。当然这个非线性变换有很多（ReLU, Sigmoid等），我们一般把这些变换叫做激活函数。如果$W_1$的大小为[10$\times$100]，那么最后仍将得到一个[10$\times$1]的分数向量。同理，一个三层的神经网络可以用下面的式子表示：$s = W_3max(0, W_2max(0, W_1x))$。下图分别为2层和3层（不包含输入层）的神经网络例子：</p>
-<p><img src="/Users/moubinhao/Blog/source/_posts/卷积神经网络CNN的那些事/neural network.png" alt="neural network"></p>
+<p><img src="/2018/11/07/卷积神经网络CNN的那些事/neural network.png" alt="neural network"></p>
 <p>从图中可以看出，神经元之间是全连接的，在这种连接下我们来计算一下神经网络参数的大小：</p>
 <p>左边图：很明显第一个权重矩阵的大小为[4$\times$3], bias大小为4; 第二个权重矩阵为[2$\times$4], bias大小为2，所以一共有26个待学习的参数。</p>
 <h3 id="什么是卷积神经网络？"><a href="#什么是卷积神经网络？" class="headerlink" title="什么是卷积神经网络？"></a>什么是卷积神经网络？</h3><p>对于一般的神经网络（CNN）来说，各层之间的神经元采用全连接的方式相连接，这种方式对于图片输入数据来说简直是灾难，比如CIFAR-10的图片大小为32$\times$32$\times$3,随着网络层数的加深，整个网络参数的规模将急剧真大，这是非常浪费的，而且将很快导致过拟合。<br>CNN则很好地利用了图像数据的特征（一般为三维数据），将网络结构进行了更加合理的优化。CNN中的神经层中的神经元都是三维的(width, height, depth)。</p>
@@ -472,7 +473,7 @@
 <p>当我们需要处理像图片这样的高维输入时，神经元和神经元之间的全连接是不切实际的。相反，我们将每个神经元只和输入空间的一个局部区域进行连接，而这个连接的空间扩展就是神经元的感受野（<strong>receptive filed）——（也就是filter的大小）</strong>，而且这个连接在depth坐标的扩展永远等于输入的depth。</p>
 <p><strong>空间维度的不对称性：所有的连接在空间上是局部的（along width and height），但是在输入体的深度（depth）上确实全局的。</strong></p>
 <p>例子：假设输入的大小为 [32x32x3]，感受野（Filter size）为3x3，则卷积层的每个神经元将和输入的3$\times$3$\times$3 = 27个神经元连接，而这些连接在空间上是局部的（e.g. 3x3）, 在输入深度上是全局的，都是3。</p>
-<p><img src="/Users/moubinhao/Blog/source/_posts/卷积神经网络CNN的那些事/cnn3.png" alt="cnn3"></p>
+<p><img src="/2018/11/07/卷积神经网络CNN的那些事/cnn3.png" alt="cnn3"></p>
 <p><strong>卷积层总结</strong></p>
 <ul>
 <li><p>假设输入体的大小为$W_1 \times H_1 \times D_1$</p>
@@ -493,7 +494,7 @@
 <p>同样是上一个例子的背景，将过程转化为矩阵乘法后如下图：</p>
 </li>
 </ul>
-<p><img src="/Users/moubinhao/Blog/source/_posts/卷积神经网络CNN的那些事/cnn_matr_mul.png" alt="cnn_matr_mul">  </p>
+<p><img src="/2018/11/07/卷积神经网络CNN的那些事/cnn_matr_mul.png" alt="cnn_matr_mul">  </p>
 <h4 id="池化层"><a href="#池化层" class="headerlink" title="池化层"></a>池化层</h4><p>池化层的作用是逐渐地减少空间大小，以减少网络的参数和计算量，从而控制过拟合。最常见的池化层的Filter大小是$2 \times 2$，stride=2，沿着width和height向下采样，丢弃掉75%的数据(Max pooling)，一般来说，池化层有以下几点：</p>
 <ul>
 <li><p>假设输入体的大小为$W_1 \times H_1 \times D_1$</p>
@@ -508,7 +509,7 @@
 <li>没有引进任何参数，因为输入代入的是固定的函数，如MAX()，AVERAGE()</li>
 <li>池化层一般不对输入进行零值填充</li>
 </ul>
-<p><img src="/Users/moubinhao/Blog/source/_posts/卷积神经网络CNN的那些事/max_pooling.png" alt="max_pooling"></p>
+<p><img src="/2018/11/07/卷积神经网络CNN的那些事/max_pooling.png" alt="max_pooling"></p>
 <h3 id="全连接层和卷积层之间的转换"><a href="#全连接层和卷积层之间的转换" class="headerlink" title="全连接层和卷积层之间的转换"></a>全连接层和卷积层之间的转换</h3><p>全连接层（FC）和CONV layer之间唯一的区别是：卷积层中的神经元只和本地区域的输入连接，而卷积层中的神经元共享参数。它们相同点也很明显：两种层中的神经元都要计算和权值的点积（dot products），所以它们的功能形式是一致的，正是因为这点，可以在FC和CONV之间进行转换：</p>
 <ul>
 <li>对于任何一个卷积层，必定都有FC层来实现相同的前向传播功能</li>
